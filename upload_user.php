@@ -66,7 +66,7 @@ function get_accuracy($gt, $arr)
         
         $predict = $arr[$key];
         
-        if ($predict === $answer) {
+        if ($predict == $answer) {
             $is_right = $is_right + 1;
         }
 
@@ -74,7 +74,7 @@ function get_accuracy($gt, $arr)
     }
 
 
-    return number_format($is_right / $index, 5);
+    return number_format(($is_right - 1) / ($index - 1), 5); //header제외
 }
 
 
