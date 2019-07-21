@@ -1,3 +1,16 @@
+<style>
+.grgr_upload {
+    border : 1px solid #dedede;
+    border-radius: 10px;
+}
+
+.grgr_upload td {
+    border : 0px;
+    border-radius: 5px;
+}
+</style>
+
+
 <?php
 
 require_once(ABSPATH . 'wp-admin/includes/image.php');
@@ -117,10 +130,10 @@ if (isset($_POST['but_submit']) && $competition_key !== '' && is_user_logged_in(
 }
 
 ?>
-<h1>Submit Prediction File</h1>
+
 
 <!-- Form -->
-<form method='post' action='' name='myform' enctype='multipart/form-data'>
+<form method='post' action='' name='myform' enctype='multipart/form-data' class = "grgr_upload">
 
     <table>
         <tr>
