@@ -32,10 +32,24 @@
         $competition_key = shortcode_atts(array('competition_key' => ''), $atts)['competition_key'];
 
         if ($competition_key !== "") {
-            $rows = $wpdb->get_results("SELECT A.* FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY score desc) AS RN FROM " 
-            . $wpdb->prefix . 'gr_leaderboard' . " WHERE competition_key = '" 
-            . $competition_key ."') AS A WHERE A.RN = 1"
-            . " ORDER BY SCORE DESC");
+            // $rows = $wpdb->get_results("SELECT A.* FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY score desc) AS RN FROM " 
+            // . $wpdb->prefix . 'gr_leaderboard' . " WHERE competition_key = '" 
+            // . $competition_key ."') AS A WHERE A.RN = 1"
+            // . " ORDER BY SCORE DESC");
+
+            $rows = $wpdb->get_results(
+
+                "select distinct a.score, a.calc_score, a.metric, a.desc, a.user_id, a.user_name from ".$wpdb->prefix."gr_leaderboard a 
+                inner join (select user_id, max(score) as ms from ".$wpdb->prefix."gr_leaderboard
+                where competition_key = '".$competition_key."'
+                group by user_id) b
+                on a.score = b.ms
+                and a.user_id = b.user_id
+                and a.competition_key = '".$competition_key."'
+                order by a.score desc"
+        );        
+
+
         }
 
         $rank = 1; 

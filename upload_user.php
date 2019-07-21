@@ -95,7 +95,7 @@ if (isset($_POST['but_submit']) && $competition_key !== '' && is_user_logged_in(
         $fileurl = "";
 
         if ($movefile && !isset($movefile['error'])) {
-            $fileurl = $movefile['url'];
+            $fileurl = $movefile['file'];
 
             //현재 답지로 저장되어 있는 파일 가져옴
             $ground_truth_fileurl = $wpdb->get_results("SELECT * FROM " . $wpdb->prefix . 'gr_competition'

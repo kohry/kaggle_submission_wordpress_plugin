@@ -18,7 +18,7 @@ if (isset($_POST['but_submit']) && $_POST['competition_key'] !== "" && $_POST['c
     $fileurl = "";
 
     if ($movefile && !isset($movefile['error'])) {
-      $fileurl = $movefile['url'];
+      $fileurl = $movefile['file'];
 
       $wpdb->insert(
         $wpdb->prefix . 'gr_competition',
